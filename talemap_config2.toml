@@ -5,5 +5,5 @@ supported_apps = ["Talemap"]
 
 [Nous_Bootloader]
 chipsets = ["ESP32"]
-offset = 0x10000
+offset = "0x10000"
 image.esp32 = "talemap_0x10000.bin"
