@@ -5,4 +5,4 @@ supported_apps = ["Talemap"]
 
 [Talemap]
 chipsets = ["ESP32"]
-image.esp32 = "talemap_0x0.bin"
+image.esp32 = "talemap_v3.0.3_0x0_20250818.bin"
