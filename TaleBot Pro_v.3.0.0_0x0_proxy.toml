@@ -1,5 +1,5 @@
 esp_toml_version = 1.0
-firmware_images_url = "https://MichaelDu9226.github.io/Nous_Bootloader/bin/"
+firmware_images_url = "https://ghproxy.net/https://raw.githubusercontent.com/MichaelDu9226/Nous_Bootloader/main/bin/"
 
 supported_apps = ["TaleBot Pro_v.3.0.0"]
 
