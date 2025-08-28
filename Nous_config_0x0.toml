@@ -5,4 +5,4 @@ supported_apps = ["Nous_v3_1_0"]
 
 [Nous_v3_1_0]
 chipsets = ["ESP32S3"]
-image.esp32s3 = "nous_v3.1.0_0x0_20250822.bin"
+image.esp32s3 = "nous_v3.1.0_0x0.bin"
