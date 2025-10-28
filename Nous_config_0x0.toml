@@ -1,8 +1,8 @@
 esp_toml_version = 1.0
 firmware_images_url = "https://MichaelDu9226.github.io/Nous_Bootloader/bin/"
 
-supported_apps = ["Nous_v3_1_0"]
+supported_apps = ["Nous_v3_1_1"]
 
-[Nous_v3_1_0]
+[Nous_v3_1_1]
 chipsets = ["ESP32S3"]
-image.esp32s3 = "nous_v3.1.0_0x0.bin"
+image.esp32s3 = "nous_v3.1.1_0x0.bin"
