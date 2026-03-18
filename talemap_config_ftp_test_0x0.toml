@@ -1,0 +1,8 @@
+esp_toml_version = 1.0
+firmware_images_url = "https://MichaelDu9226.github.io/Nous_Bootloader/bin/"
+
+supported_apps = ["TaleBot_Pro_ftp_test"]
+
+[TaleBot_Pro_ftp_test]
+chipsets = ["ESP32"]
+image.esp32 = "talemap_ftp_test_0x0.bin"
