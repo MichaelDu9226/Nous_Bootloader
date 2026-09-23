@@ -5,4 +5,4 @@ supported_apps = ["TaleBot_Pro_v3_0_0"]
 
 [TaleBot_Pro_v3_0_0]
 chipsets = ["ESP32"]
-image.esp32 = "talemap_0x0.bin"
+image.esp32 = "talebot_V3.1.1_0805_0x0.bin"
