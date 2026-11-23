@@ -1,0 +1,46 @@
+---
+description: ESP Launchpad TOML 固件配置文件格式规范
+globs: **/*.toml
+alwaysApply: false
+---
+
+# ESP Launchpad TOML 格式规范
+
+编辑或新增 ESP Launchpad 固件配置文件（`*.toml`）时，必须遵守以下规范：
+
+## 1. 应用名称禁止包含 `.` 和空格
+
+在 TOML 规范中，未加引号的 `.` 是嵌套表分隔符。表头 `[TaleBot_Pro_V3.1.1]` 会被解析为嵌套结构 `TaleBot_Pro_V3 -> 1 -> 1`，导致 ESP Launchpad 按 `supported_apps` 查找顶层键失败，页面一直卡在 `Loading firmware configuration…`。
+
+- `supported_apps` 与表头 `[app_name]` **必须完全一致**。
+- 命名仅使用字母、数字、下划线 `_` 或连字符 `-`；版本号用下划线分隔（如 `V3_1_1`）。
+
+```toml
+# ❌ BAD：表头包含 `.` 或空格，会被解析为嵌套表或语法错误
+supported_apps = ["TaleBot_Pro_V3.1.1"]
+
+[TaleBot_Pro_V3.1.1]
+chipsets = ["ESP32"]
+image.esp32 = "talebot_V3.1.1_0805_0x0.bin"
+
+# ✅ GOOD：使用下划线代替 `.` 和空格
+supported_apps = ["TaleBot_Pro_V3_1_1"]
+
+[TaleBot_Pro_V3_1_1]
+chipsets = ["ESP32"]
+image.esp32 = "talebot_V3.1.1_0805_0x0.bin"
+```
+
+## 2. 路径与文件校验
+
+- `firmware_images_url` 必须以 `/` 结尾。
+- `image.<chipset>` 指定的文件必须真实存在于 `bin/` 目录中，且文件名大小写完全一致。
+- `chipsets`（如 `["ESP32"]`、`["ESP32S3"]`）需与 `image.<chipset>` 小写后缀对应。
+
+## 3. 提交前校验
+
+修改 `.toml` 后，用 Python 验证 `supported_apps` 中的每个名称都能在顶层键中找到：
+
+```bash
+python -c "import tomllib, sys; d=tomllib.load(open(sys.argv[1],'rb')); assert all(a in d for a in d['supported_apps']), d" <file.toml>
+```
