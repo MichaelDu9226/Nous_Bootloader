@@ -31,13 +31,28 @@ chipsets = ["ESP32"]
 image.esp32 = "talebot_V3.1.1_0805_0x0.bin"
 ```
 
-## 2. 路径与文件校验
+## 2. 烧录地址 `offset`
+
+当前线上 ESP Launchpad 会读取应用段里的 `offset`，缺省为 `0x0000`，且不会整片擦除。
+
+- 从 `0x0` 开始的完整镜像不要写 `offset`。
+- 只含应用分区、需要写到 `0x10000` 的 bin，必须写成字符串：`offset = "0x10000"`。
+- `0x10000` 只覆盖 `ota_0`。设备分区表必须把 `ota_0` 放在 `0x10000`，且当前从 `ota_0` 启动，语音和 NVS 才会保留。
+
+```toml
+[TaleBot_Pro_V3_1_2_app]
+chipsets = ["ESP32"]
+offset = "0x10000"
+image.esp32 = "flash_v3.1.2_261112_0x10000.bin"
+```
+
+## 3. 路径与文件校验
 
 - `firmware_images_url` 必须以 `/` 结尾。
 - `image.<chipset>` 指定的文件必须真实存在于 `bin/` 目录中，且文件名大小写完全一致。
 - `chipsets`（如 `["ESP32"]`、`["ESP32S3"]`）需与 `image.<chipset>` 小写后缀对应。
 
-## 3. 提交前校验
+## 4. 提交前校验
 
 修改 `.toml` 后，用 Python 验证 `supported_apps` 中的每个名称都能在顶层键中找到：
 
